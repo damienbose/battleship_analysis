@@ -23,38 +23,40 @@ This article will try and analyse the game of battleship. Our goal is to come up
 
 \section{Modelling the Game}
 
-We first come to the question of modelling the opponents board. First, however, note
-
-
-Notice that the game lies on a $10 \times 10$ grid. Hence, there are 100 tiles.
-
-Therefore, we can represent the state of the opponents entire board at time $t$ as a vector of random variables corresponding to each tile.
+We first come to the question of modelling the opponents board. First, however, notice that the game lies on a $10 \times 10$ grid. Hence, there are 100 tiles. Therefore, we can model them as a vector of random variables.
 
 \begin{definition}
- $B_t =(P(X_t^0 = 1),...,P(X_t^{99} = 1))$, where $P(X_t^i = 1)$ is the probability that $i\textsuperscript{th}$ the ith tile has a ship at time $t$.
+$X^i$ denotes wether the $i\textsuperscript{th}$ tile has a ship or not. $X^i = 1$ if the $i\textsuperscript{th}$ tile has a ship and $X^i = 0$ if it doesn't.
 \end{definition}
 
-Notice that $X^i \sim Ber(\theta^i)$. Hence $P(X^i = 1) = \theta^i$ and determining the $\theta^i$ will allow us to choose the tiles most likely be a ship.
+Notice that $X^i \sim Ber(\theta^i)$. Hence $P(X^i = 1) = \theta^i$. Determining this $\theta^i$ will allow us to choose the most likely boat tiles. 
 
-Furthermore, $B_0$ is initial placement of the battle ships on the opponents board. The distribution of $B_0$ is determined by the opponent. 
-
-Now lets not forget out goal: be the first to hit all 17 boat tiles of the opponent. 
-
-\begin{definition}
- $T_s$ is the number of moves/time it takes for us to do so with strategy s.
-\end{definition}
-
-We can therefore quantify the performance of our strategy using $E[T_s]$. This is not be the entire picture because winning is dependent on the performance of the other player as well. First, the initially
-
-For example lets say player 1 has strategy $s_1$ and player 2 has strategy $s_2$, and $E[T_{s_1}] = E[T_{s_2}|B_0]$. Then, $s_1$ might be a better strategy than $s_2$ if $var[T_{s_1}] > var[T_{s_2}]$. However, this is simply an intuition and has to be proven and/or tested. Lets simply focus on finding $s$ which minimises $E[T_s]$ for now. 
-
-
-
-Therefore, we can represent the state of the entire board as a row vector $B = (X^0,...,X^{99})$, where $X^i = 1$ if the $i\textsuperscript{th}$ tile has a ship and $X^i = 0$ if it doesn't.
+Now, importantly we must remember that the opponent is responsible for initially placing their ships, so the opponents placement strategy will determine the value of these $\theta^i$ parameters. Other papers\cite{rochford}\cite{alemi} assume that the ships are randomly distributed. However, a more intelligent opponent (who has information about our strategy) might not do that. 
 
 Note we make no i.i.d assumptions for $X^i$. Since, for example, if we know tile i has a ship, then we can conclude that adjacent tiles are more likely to be ships as well.
 
-TODO: TALK ABOUT SAMPLE SPACE, FINITE, ENUMERATE OVER ALL
+Hence as the game progresses we can keep conditioning, etc. 
+%\begin{definition}
+% $B_t =(P(X_t^0 = 1),...,P(X_t^{99} = 1))$, where $P(X_t^i = 1)$ is the probability that $i\textsuperscript{th}$ the ith tile has a ship at time $t$.
+%\end{definition}
+%
+%Notice that $X^i \sim Ber(\theta^i)$. Hence $P(X^i = 1) = \theta^i$ and determining the $\theta^i$ will allow us to choose the tiles most likely be a ship.
+%
+%Furthermore, $B_0$ is initial placement of the battle ships on the opponents board. The distribution of $B_0$ is determined by the opponent. 
+%
+%Now lets not forget out goal: be the first to hit all 17 boat tiles of the opponent. 
+%
+%\begin{definition}
+% $T_s$ is the number of moves/time it takes for us to do so with strategy s.
+%\end{definition}
+%
+%We can therefore quantify the performance of our strategy using $E[T_s]$. This is not be the entire picture because winning is dependent on the performance of the other player as well. First, the initially
+%
+%For example lets say player 1 has strategy $s_1$ and player 2 has strategy $s_2$, and $E[T_{s_1}] = E[T_{s_2}|B_0]$. Then, $s_1$ might be a better strategy than $s_2$ if $var[T_{s_1}] > var[T_{s_2}]$. However, this is simply an intuition and has to be proven and/or tested. Lets simply focus on finding $s$ which minimises $E[T_s]$ for now. 
+
+
+%
+%Therefore, we can represent the state of the entire board as a row vector $B = (X^0,...,X^{99})$, where $X^i = 1$ if the $i\textsuperscript{th}$ tile has a ship and $X^i = 0$ if it doesn't.
 
 \begin{thebibliography}{11}
 
