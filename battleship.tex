@@ -31,7 +31,7 @@ Notice that the game lies on a $10 \times 10$ grid. Hence, there are 100 tiles.
 Therefore, we can represent the state of the opponents entire board at time $t$ as a vector of random variables corresponding to each tile.
 
 \begin{definition}
- $B_t =(X_t^0,...,X_t^{99})$, where $P(X_t^i = 1)$ is the probability that $i\textsuperscript{th}$ the ith tile has a ship at time $t$.
+ $B_t =(P(X_t^0 = 1),...,P(X_t^{99} = 1))$, where $P(X_t^i = 1)$ is the probability that $i\textsuperscript{th}$ the ith tile has a ship at time $t$.
 \end{definition}
 
 Notice that $X^i \sim Ber(\theta^i)$. Hence $P(X^i = 1) = \theta^i$ and determining the $\theta^i$ will allow us to choose the tiles most likely be a ship.
